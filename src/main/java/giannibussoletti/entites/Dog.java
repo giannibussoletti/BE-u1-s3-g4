@@ -1,17 +1,20 @@
 package giannibussoletti.entites;
 
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Cane")
+//@DiscriminatorValue("Cane")
 public class Dog extends Animal {
     private double maxSpeed;
 
-    public Dog(String name, int age, double maxSpeed) {
-        super(name, age);
+    public Dog(String name, int age, double maxSpeed, Owners owner) {
+        super(name, age, owner);
         this.maxSpeed = maxSpeed;
     }
+
+    protected Dog() {
+    }
+
 
     public double getMaxSpeed() {
         return maxSpeed;

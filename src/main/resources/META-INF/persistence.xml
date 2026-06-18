@@ -6,10 +6,8 @@
         <class>giannibussoletti.entites.Cat</class>
         <class>giannibussoletti.entites.Animal</class>
         <class>giannibussoletti.entites.Dog</class>
-        <class>giannibussoletti.entities.Event</class>
-        <class>giannibussoletti.entities.Persona</class>
-        <class>giannibussoletti.entities.Location</class>
-        <class>giannibussoletti.entities.Participation</class>
+        <class>giannibussoletti.entites.Owners</class>
+
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/beu1s3g4"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>

@@ -1,15 +1,14 @@
 package giannibussoletti.entites;
 
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Gatto")
+//@DiscriminatorValue("Gatto")
 public class Cat extends Animal {
     private double maxJumpHeight;
 
-    public Cat(String name, int age, double maxJumpHeight) {
-        super(name, age);
+    public Cat(String name, int age, double maxJumpHeight, Owners owner) {
+        super(name, age, owner);
         this.maxJumpHeight = maxJumpHeight;
 
     }

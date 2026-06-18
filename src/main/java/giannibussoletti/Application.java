@@ -1,10 +1,10 @@
 package giannibussoletti;
 
 import giannibussoletti.dao.AnimalsDAO;
-import giannibussoletti.entites.Animal;
+import giannibussoletti.dao.OwnersDAO;
 import giannibussoletti.entites.Cat;
 import giannibussoletti.entites.Dog;
-import giannibussoletti.exceptions.NotFoundException;
+import giannibussoletti.entites.Owners;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -34,20 +34,39 @@ public class Application {
         EntityManager em = emf.createEntityManager();
 
         AnimalsDAO ad = new AnimalsDAO(em);
+        OwnersDAO od = new OwnersDAO(em);
 
-        Dog rex = new Dog("Rex", 10, 1.2);
-        Cat felix = new Cat("Felix", 3, 2.3);
+        Owners aldoFromDB = od.findById("2563eec1-1809-4f49-a376-20b5d622bbfe");
+        Owners giovanniFromDB = od.findById("36d3024e-1f52-4e50-938a-fe01e3b843f6");
+
+        Dog rex = new Dog("Rex", 10, 1.2, aldoFromDB);
+        Cat felix = new Cat("Felix", 3, 2.3, aldoFromDB);
+        Dog ringhio = new Dog("Ringhio", 5, 90.5, giovanniFromDB);
+        Cat pantera = new Cat("Pantera", 4, 5.3, giovanniFromDB);
+        Owners aldo = new Owners("Aldo", "Baglio");
+        Owners giovanni = new Owners("Giovanni", "Storti");
+//        od.save(giovanni);
 
 //        ad.save(rex);
 //        ad.save(felix);
+//        ad.save(ringhio);
+//        ad.save(pantera);
 
-        try {
-            Animal animal = ad.findById("ceb3bb44-45f7-4d31-b9d0-1ba2667d108d");
-            System.out.println(animal);
-        } catch (NotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-
+        ad.findByOwner(giovanniFromDB).forEach(System.out::println);
+//
+//        try {
+//            Animal animal = ad.findById("2904d46a-31eb-453c-8e7d-f0eeca480e5b");
+//            System.out.println(animal);
+//        } catch (NotFoundException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        ad.getAllAnimals().forEach(System.out::println);
+//        ad.getAllDogs().forEach((System.out::println));
+//        ad.getYoungerThen(11).forEach(System.out::println);
+//        ad.getNameAnimalStartsWith("r").forEach(System.out::println);
+//        ad.findByNameAndUpdate("Rex", "Ringhio");
+//        ad.findByNameAndDelete("Ringhio");
     }
 
     // JOINED
@@ -64,6 +83,16 @@ public class Application {
     // Questo metodo andrà a creare tabelle distinte solo delle classi concrete, quindi non classi astratte
     // Questo porta al fatto che se per qualsiasi cosa dobbiamo confrontare le 2 tabelle il lavoro del database sarà molto di più
     // Qui creare delle relazioni è molto difficile se no addirittura impossibile non avendo cose che uniscano le due tabelle
-    
+    // Il vantaggio principale è che se dobbiamo cercare solo per esempio, dog o cat
+    // possiamo creare dei metodi a posta per poter trovare solo i cani o i gatti
+
+    // Java Persistence Query Language - JPQL
+    // Tipo di query supportate:
+    // - Named query: sono tipicamente utilizzate per eseguire le operazioni più comuni, vengono infatti memorizzate e
+    // riutilizzate quando è necessario
+    // - Dynamic query: vengono create secondo le necessità applicative del momento
+    // Entrambe le query possono essere query normali o typed query, queste ultime hanno il vantaggio di fornire un
+    // controllo sul tipo e quindi restituire risultati di un tipo specifico (ad esempio una lista di oggetti Automobile)
+
 
 }
