@@ -42,11 +42,28 @@ public class Application {
 //        ad.save(felix);
 
         try {
-            Animal animal = ad.findById("444db5e1-7438-47d6-87e9-be7954cd2466");
+            Animal animal = ad.findById("ceb3bb44-45f7-4d31-b9d0-1ba2667d108d");
             System.out.println(animal);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
 
     }
+
+    // JOINED
+    // Vengono create più tabelle, una tabella (anche astratta) con i parametri del padre
+    // e poi per ogni classe figlio verrà creerà una tabella con solo gli attributi delle classi figlio
+    // In questo caso verranno create 3 tabelle
+    // Animal
+    // Cat
+    // Dog
+    // Il pro è che le tabelle saranno molto più pulite
+    // Il contro è che per recuperare i dati ci vorrà più tempo a causa del fatto che il programma dovrà fare un Join per ogni ricerca
+
+    // TABLE PER (CONCRETE) CLASS
+    // Questo metodo andrà a creare tabelle distinte solo delle classi concrete, quindi non classi astratte
+    // Questo porta al fatto che se per qualsiasi cosa dobbiamo confrontare le 2 tabelle il lavoro del database sarà molto di più
+    // Qui creare delle relazioni è molto difficile se no addirittura impossibile non avendo cose che uniscano le due tabelle
+    
+
 }
